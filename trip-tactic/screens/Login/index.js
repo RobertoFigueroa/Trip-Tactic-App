@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { View, ImageBackground  } from 'react-native';
+import { View, ImageBackground, Button, Text } from 'react-native';
 import LoginForm from '../../components/LoginForm';
 import styles from './styles';
 
@@ -12,6 +12,8 @@ const Login = () => {
     <View style={styles.container}>
       <ImageBackground source={image} style={styles.image}>
         <LoginForm />
+        <Text> No register yet? </Text>
+        <Button title='Register'/>
       </ImageBackground>
     </View>
   );
