@@ -4,6 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import Login from './screens/Login';
+import Home from './screens/Home';
 import { configureStore } from './store';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
@@ -18,6 +19,7 @@ export default function App() {
         <PersistGate loading={null} persistor={persistor}>
           <Stack.Navigator>
             <Stack.Screen name="Log In" options={{title: "Welcome"}} component={Login}/>
+            <Stack.Screen name="Home" component={Home}/>
           </Stack.Navigator>
         </PersistGate>
       </Provider>
