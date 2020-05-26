@@ -99,16 +99,18 @@ const error = (state = null, action) => {
     }
 }
 
-export default combineReducers({
+const trips = combineReducers({
     byId,
     order,
     isFetching,
     error,
 });
 
+export default trips;
+
 //Selectors
 
 export const getTrip = (state, id) => state.byId[id];
 export const getAllTrips = state => state.order.map(id => getTrip(state,id));
 export const isFetchingTrips = state => state.isFetching;
-export const getFetchingError = state => state.error;
+export const getFetchingTripsError = state => state.error;
