@@ -2,10 +2,12 @@ import { combineReducers } from 'redux';
 
 import auth, * as authSelectors from './auth';
 import trips, * as tripSelectors from './trips';
+import registration, * as registrationSelectors from './registration';
 
 const reducer = combineReducers({
   auth,
   trips,
+  registration,
 });
 
 export default reducer;
@@ -27,6 +29,9 @@ export const getAllTrips = state => tripSelectors.getAllTrips(state.trips);
 export const isFetchingTrips = state => tripSelectors.isFetchingTrips(state.trips);
 export const getFetchingTripsError = state => tripSelectors.getFetchingTripsError(state.trips);
 
+//registration
+export const getUserRegistering = state => registrationSelectors.getUserRegistering(state.registration);
+export const getIsRegistering = state => registrationSelectors.getIsRegistering(state.registration);
 
 
 /*

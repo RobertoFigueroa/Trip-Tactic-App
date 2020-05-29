@@ -13,7 +13,7 @@ import * as types from '../types/auth';
 
 function* login(action) {
   try {
-    console.log("SI entro al saga", `${API_BASE_URL}/token-auth/` );
+    console.log("SI entro al saga",  JSON.stringify(action.payload) );
     const response = yield call(
       fetch,
       `${API_BASE_URL}/token-auth/`,

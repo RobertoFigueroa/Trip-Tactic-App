@@ -5,9 +5,12 @@ import {
   persistReducer,
 } from 'redux-persist';
 
+
+import { AsyncStorage } from 'react-native';
+import { composeWithDevTools } from 'redux-devtools-extension';
+
 import reducer from './reducers';
 import mainSaga from './sagas';
-import { AsyncStorage } from 'react-native';
 
 
 export const configureStore = () => {
@@ -23,7 +26,7 @@ export const configureStore = () => {
 
   const store = createStore(
     persistedReducer,
-    applyMiddleware(sagaMiddleware),
+    composeWithDevTools(applyMiddleware(sagaMiddleware)),
   );
 
   const persistor = persistStore(store);

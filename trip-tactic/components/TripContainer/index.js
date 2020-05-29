@@ -1,14 +1,18 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
-import { View } from 'react-native';
+import { View, Text, Button } from 'react-native';
 
 import './styles.js';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/trips';
 import Trip from '../Trip';
 
+import { AuthContext } from '../../context';
+
+
 const TripContainer = ({trips, isLoading, onLoad}) => {
     useEffect(onLoad,[]);
+    const { signOut } = useContext(AuthContext);
     return(
         <View>
             {
@@ -28,6 +32,7 @@ const TripContainer = ({trips, isLoading, onLoad}) => {
                     trips.map(({ id }) => <Trip key={id} id={id}/>)
                 )
             }
+            <Button title={"Sign Out"} onPress={() => {signOut()}}></Button>
         </View>
     );
 };
