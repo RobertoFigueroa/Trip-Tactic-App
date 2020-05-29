@@ -7,7 +7,7 @@ export const completeFetchingTrips = (entities, order) =>({
     type: types.TRIP_FETCH_COMPLETED,
     payload: {
         entities,
-        orderm
+        order
     },
 });
 export const failFetchingTrips = error => ({

@@ -1,13 +1,15 @@
 import React from 'react';
 
-import { View, Text } from 'react-native';
+
+import { View } from 'react-native';
+import CreateTripForm from '../../components/CreateTripForm';
 
 import styles from './styles';
 
 const CreateTrip = () => {
   return (
     <View style={styles.container}>
-      <Text>Aqui va el formulario para crear mapas!</Text>
+      <CreateTripForm />
     </View>
   );
 }

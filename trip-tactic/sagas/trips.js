@@ -5,6 +5,9 @@ import {
     select,
   } from 'redux-saga/effects';
 
+import { normalize } from 'normalizr';
+
+
 import { API_BASE_URL } from '../settings';
 import * as selectors from '../reducers';
 import * as actions from '../actions/trips';
@@ -30,6 +33,7 @@ function* fetchTrips(action) {
             );
 
             if(response.status === 200){
+                console.log("Si hay trips")
                 const jsonResult = yield response.json();
                 const {
                     entities: { trips },
@@ -56,3 +60,56 @@ export function* watchTripsFetch(){
         fetchTrips,
     )
 }
+
+
+
+function* createTrip(action) {
+    const oldId = action.payload.id; //ese lo mando al creara el trip
+    try {
+        const isAuth = yield select(selectors.isAuthenticated);
+        console.log(isAuth);
+        if(isAuth){
+            const token = yield select(selectors.getAuthToken);
+            const userId = yield select(selectors.getAuthUserID);
+            const data = { ...action.payload, user: userId};//le agrego al usuario que esta creando el mapa
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/trips/`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers:{
+                        'Content-Type':'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            );
+
+            if(response.status >= 200 && response.status <= 300){
+                console.log("Se agrego correctamente");
+                const jsonResult = yield response.json();
+                yield put(
+                    actions.completeAddingTrip(
+                        oldId,
+                        jsonResult,
+                    ),
+                );
+            } else{
+                console.log('Falló el post');
+                yield put(actions.failAddingTrip(oldId, "Fallo la conexión"))
+            }
+        }
+    } catch (error) {
+        console.log("ERROR", error);
+        yield put(actions.failAddingTrip(oldId, error));
+    }
+}
+
+export function* watchTripsAdd(){
+    yield takeEvery(
+        types.TRIP_ADD_STARTED,
+        createTrip,
+    )
+}
+
+

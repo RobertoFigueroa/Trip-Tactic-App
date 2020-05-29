@@ -1,7 +1,7 @@
 import { fork, all } from 'redux-saga/effects';
 
 import { watchLoginStarted } from '../sagas/auth';
-import { watchTripsFetch } from './trips';
+import { watchTripsFetch, watchTripsAdd } from './trips';
 import { watchSignin } from './registration';
 
 function* mainSaga() {
@@ -9,6 +9,7 @@ function* mainSaga() {
     fork(watchLoginStarted),
     fork(watchTripsFetch),
     fork(watchSignin),
+    fork(watchTripsAdd),
   ]);
 }
 
