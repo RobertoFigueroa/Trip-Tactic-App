@@ -2,7 +2,7 @@ import React, {useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
 import { View, Text, Button } from 'react-native';
 
-import './styles.js';
+import  styles from './styles.js';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/trips';
 import Trip from '../Trip';
@@ -14,7 +14,7 @@ const TripContainer = ({trips, isLoading, onLoad}) => {
     useEffect(onLoad,[]);
     const { signOut } = useContext(AuthContext);
     return(
-        <View>
+        <View style={styles.container}>
             {
                 trips.length === 0 && !isLoading && (
                     <Text>

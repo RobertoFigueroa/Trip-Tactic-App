@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,12 +8,18 @@ import * as actions from '../../actions/trips';
 
 import styles from './styles';
 
-const CreateTripForm = ({ onCreate }) => {
+const CreateTripForm = ({ onCreate, navigation }) => {
 
-  const { control, handleSubmit, errors } = useForm();
+
+
+  const { control, handleSubmit, errors, reset} = useForm();
   const onSubmit = data => {
     const newData = { ...data, id:uuidv4()};
     onCreate(newData);
+    navigation.navigate('Home');
+
+
+
   }
 
   return (
@@ -58,3 +64,4 @@ export default connect(
 )(CreateTripForm);
 
 //export default CreateTripForm;
+

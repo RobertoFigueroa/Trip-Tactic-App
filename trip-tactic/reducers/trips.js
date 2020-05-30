@@ -1,5 +1,10 @@
 import omit from 'lodash/omit';
+import unionWith from 'lodash/unionWith';
+import union from 'lodash/union';
+import isEqual from 'lodash/isEqual';
+
 import {combineReducers} from 'redux';
+
 
 import * as types from '../types/trips';
 
@@ -8,15 +13,22 @@ const byId = (state = {}, action) =>{
     switch(action.type){
         case types.TRIP_FETCH_COMPLETED:{
             const{entities, order} = action.payload;
-            const newState = {...state};
-            order.forEach(id=>{
-                newState[id] = {
-                    ...entities[id],
-                    isConfirmed: true
-                };
-            });
+            console.log("este es el estado inicial", state);
+            if(state){
 
-            return newState;
+                const newState = {...state};
+                order.forEach(id=>{
+                    newState[id] = {
+                        ...entities[id],
+                        isConfirmed: true
+                    };
+                });
+                return newState;
+            }
+            else {
+                const newState = unionWith(state, entities, isEqual);
+                return newState;
+            }
         }
         case types.TRIP_ADD_STARTED:{
             const newState = {...state};
@@ -47,7 +59,7 @@ const byId = (state = {}, action) =>{
 const order = (state = [], action) =>{
     switch(action.type){
         case types.TRIP_FETCH_COMPLETED:{
-            return[...state, ...action.payload.order];
+            return union(state, action.payload.order);
         }
         case types.TRIP_ADD_STARTED:{
             return[...state, action.payload.id];

@@ -6,10 +6,10 @@ import CreateTripForm from '../../components/CreateTripForm';
 
 import styles from './styles';
 
-const CreateTrip = () => {
+const CreateTrip = ({ navigation }) => {
   return (
     <View style={styles.container}>
-      <CreateTripForm />
+      <CreateTripForm navigation={ navigation }/>
     </View>
   );
 }

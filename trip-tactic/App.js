@@ -153,12 +153,11 @@ function App() {
                 <AuthStackScreen />
             ) : (
               <Drawer.Navigator>
-              <Drawer.Screen name="Home" component={Home} />
-              <Drawer.Screen name="Places" component={Places} />
-              <Drawer.Screen name="CreateTrip" component={CreateTrip} />
+                <Drawer.Screen name="Home" component={Home} />
+                <Drawer.Screen name="Places" component={Places} />
+                <Drawer.Screen name="CreateTrip" component={CreateTrip} />
               </Drawer.Navigator>
               )}
-
           </PersistGate>
         </Provider>
       </NavigationContainer>
