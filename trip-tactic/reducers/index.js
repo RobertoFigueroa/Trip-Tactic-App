@@ -3,11 +3,13 @@ import { combineReducers } from 'redux';
 import auth, * as authSelectors from './auth';
 import trips, * as tripSelectors from './trips';
 import registration, * as registrationSelectors from './registration';
+import countries, * as countrySelectors from './country';
 
 const reducer = combineReducers({
   auth,
   trips,
   registration,
+  countries,
 });
 
 export default reducer;
@@ -33,6 +35,11 @@ export const getFetchingTripsError = state => tripSelectors.getFetchingTripsErro
 export const getUserRegistering = state => registrationSelectors.getUserRegistering(state.registration);
 export const getIsRegistering = state => registrationSelectors.getIsRegistering(state.registration);
 
+//county
+export const getCountry = (state, id) => countrySelectors.getCountry(state.countries, id);
+export const getAllCountries = state => countrySelectors.getAllCountries(state.countries);
+export const isFetchingCountries = state => countrySelectors.isFetchingCountries(state.countries);
+export const getFetchingCountriesError = state => countrySelectors.getFetchingCountriesError(state.countries);
 
 /*
 How the state seems like
