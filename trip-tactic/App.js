@@ -15,6 +15,7 @@ import Signin from './screens/Signin';
 import Home from './screens/Home';
 import Places from './screens/Places';
 import CreateTrip from './screens/CreateTrip';
+import Country from './screens/Countries';
 
 import { AuthContext } from './context'
 
@@ -162,6 +163,7 @@ function App() {
                 <Drawer.Screen name="Home" component={Home}  />
                 <Drawer.Screen name="Places" component={Places} />
                 <Drawer.Screen name="CreateTrip" component={CreateTrip} />
+                <Drawer.Screen name ="Countries" component={Country}/>
               </Drawer.Navigator>
               )}
           </PersistGate>
