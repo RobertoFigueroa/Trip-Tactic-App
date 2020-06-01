@@ -41,6 +41,7 @@ export const getCountry = (state, id) => countrySelectors.getCountry(state.count
 export const getAllCountries = state => countrySelectors.getAllCountries(state.countries);
 export const isFetchingCountries = state => countrySelectors.isFetchingCountries(state.countries);
 export const getFetchingCountriesError = state => countrySelectors.getFetchingCountriesError(state.countries);
+export const getSelectedCountry = state => countrySelectors.getSelectedCounty(state.countries);
 
 /*
 How the state seems like

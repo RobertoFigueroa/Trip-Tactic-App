@@ -35,7 +35,18 @@ const order = (state = [], action) => {
             return union(state, action.payload.order);
         }
         default:{
-            return state
+            return state;
+        }
+    }
+}
+
+const selectedCountry = (state = null, action) =>{
+    switch(action.type){
+        case types.COUNTRY_SELECTED:{
+            return action.payload.countryId;
+        }
+        default:{
+            return state;
         }
     }
 }
@@ -77,6 +88,7 @@ const fetchingError = (state = null, action) =>{
 const countries = combineReducers({
     byId,
     order,
+    selectedCountry,
     isFetching,
     fetchingError,
 });
@@ -89,3 +101,4 @@ export const getCountry = (state, id) => state.byId[id];
 export const getAllCountries = state => state.order.map(id => getCountry(state,id));
 export const isFetchingCountries = state => state.isFetching;
 export const getFetchingTripsError = state => state.fetchingError;
+export const getSelectedCounty = state => state.selectedCountry;
