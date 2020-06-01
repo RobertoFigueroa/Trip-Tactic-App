@@ -28,8 +28,13 @@ const AuthStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 
 
+const HomeStack = createStackNavigator();
 
-
+const HomeStackScreen = () => (
+  <HomeStack.Navigator>
+    <HomeStack.Screen name="Home" component={Home}/>
+  </HomeStack.Navigator>
+);
 
 const AuthStackScreen = () => (
   <AuthStack.Navigator>
@@ -113,6 +118,7 @@ function App() {
 
     },
     signOut: () => {
+      store.dispatch(actions.logout());
       dispatch({ type: 'LOGOUT' });
 
     },
@@ -153,7 +159,7 @@ function App() {
                 <AuthStackScreen />
             ) : (
               <Drawer.Navigator>
-                <Drawer.Screen name="Home" component={Home} />
+                <Drawer.Screen name="Home" component={Home}  />
                 <Drawer.Screen name="Places" component={Places} />
                 <Drawer.Screen name="CreateTrip" component={CreateTrip} />
               </Drawer.Navigator>

@@ -1,11 +1,13 @@
 import React, {useEffect, useContext } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Button } from 'react-native';
+import { View, Text, Button, Image, ActivityIndicator, ScrollView } from 'react-native';
 
 import  styles from './styles.js';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/trips';
 import Trip from '../Trip';
+
+const img = require('../../assets/goTravel.png');
 
 import { AuthContext } from '../../context';
 
@@ -15,16 +17,21 @@ const TripContainer = ({trips, isLoading, onLoad}) => {
     const { signOut } = useContext(AuthContext);
     return(
         <View style={styles.container}>
+            <ScrollView>
+            
             {
                 trips.length === 0 && !isLoading && (
-                    <Text>
+                    <View style={styles.containerEmpty}>
+                    <Text style={styles.text}>
                         {'You dont have any scheduled trips'}
                     </Text>
+                    <Image style={styles.image} source={img}/>
+                    </View>
                 )
             }
             {
                 isLoading &&(
-                    <Text>{'Loading...'}</Text>
+                    <ActivityIndicator  size="small" color="#0000ff" />
                 )
             }
             {
@@ -33,6 +40,7 @@ const TripContainer = ({trips, isLoading, onLoad}) => {
                 )
             }
             <Button title={"Sign Out"} onPress={() => {signOut()}}></Button>
+            </ScrollView>
         </View>
     );
 };

@@ -2,10 +2,10 @@ import { combineReducers } from 'redux';
 
 import * as types from '../types/registration';
 
-const userRegistered = (state = null, action) => {
+const userRegistered = (state = {}, action) => {
   switch(action.type) {
     case types.REGISTRATION_COMPLETED: {
-      return action.payload;
+      return {...state, ...action.payload};
     }
     default: {
       return state;
@@ -13,10 +13,16 @@ const userRegistered = (state = null, action) => {
   }
 }
 
-const isRegistering = (state = false, action) => {
+const isRegistering = (state = null, action) => {
   switch(action.type) {
+    case types.REGISTRATION_STARTED: {
+      return false;
+    }
     case types.REGISTRATION_COMPLETED: {
       return true;
+    }
+    case types.REGISTRATION_FAILED: {
+      return null;
     }
     default:{
       return state;
@@ -38,12 +44,25 @@ const error = (state=null, action) => {
   }
 }
 
+const registrationCompleted = (state=false, action) => {
+  switch(action.type) {
+    case types.REGISTRATION_COMPLETED: {
+      return true;
+    }
+    default : {
+      return state;
+    }
+  }
+}
+
 export default combineReducers({
   userRegistered,
   isRegistering,
   error,
+  registrationCompleted,
 }); 
 
 export const getUserRegistering = state => state.userRegistered;
 export const getIsRegistering = state => state.isRegistering;
+export const getRegistrationCompleted = state => state.registrationCompleted;
 

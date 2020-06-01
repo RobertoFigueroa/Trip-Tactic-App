@@ -5,12 +5,12 @@ import SigninForm from '../../components/SinginForm';
 import styles from './styles';
 
 
-const Signin = () => {
+const Signin = ({ navigation }) => {
 
 
   return (
     <View style={styles.container}>
-      <SigninForm /> 
+      <SigninForm navigation={navigation} /> 
     </View>
   );
 }

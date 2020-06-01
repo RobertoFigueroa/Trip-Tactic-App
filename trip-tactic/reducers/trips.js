@@ -48,7 +48,7 @@ const byId = (state = {}, action) =>{
             return newState
         }
         case types.TRIP_DELETE_STARTED:{
-            return omit(sate, action.payload.id)
+            return omit(state, action.payload.id)
         }
         default:{
             return state

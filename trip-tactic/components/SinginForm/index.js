@@ -1,17 +1,18 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, TextInput, Button, Alert } from 'react-native';
+import { View, Text, TextInput, Button, Alert, ActivityIndicator} from 'react-native';
 import { useForm, Controller } from "react-hook-form";
+
 import * as actions from '../../actions/registration';
+import * as selectors from '../../reducers';
 
 
-
-const SigninForm = ({ onSignin }) => {
+const SigninForm = ({ navigation, onSignin, isRegistering, isCompleted }) => {
 
 
   const { control, handleSubmit, errors } = useForm();
-  //const onSubmit = data => onSignin(data);
-  const onSubmit = data => signIn;
+  const onSubmit = data => onSignin(data);
+  //const onSubmit = data => signIn;
 
   return (
     <View>
@@ -71,13 +72,37 @@ const SigninForm = ({ onSignin }) => {
     />
     {errors.password && <Text>This field is required</Text>}
 
-    <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+    {isRegistering === false && isRegistering !== null ? 
+      (
+        <ActivityIndicator  size="small" color="#0000ff" />
+        ) : (
+          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+
+        )
+    }
+    
+    {
+      isCompleted && Alert.alert(
+        'Registration Completed!',
+        'Please Log in for create new advetures',
+        [
+          {
+            text: "Let's go!",
+            onPress: () => navigation.navigate("Welcome")
+          },
+        ]
+      )
+    }
+
     </View>
   );
 };
 
 export default connect(
-  undefined,
+  state => ({
+    isRegistering: selectors.getIsRegistering(state),
+    isCompleted: selectors.getRegistrationCompleted(state),
+  }),
   dispatch => ({
     onSignin(user) {
       console.log("Esto le mando", user);

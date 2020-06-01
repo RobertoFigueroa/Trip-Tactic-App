@@ -113,3 +113,44 @@ export function* watchTripsAdd(){
 }
 
 
+function* deleteTrip(action) {
+    try {
+        const isAuth = yield select(selectors.isAuthenticated);
+        console.log(isAuth);
+        if(isAuth){
+            const token = yield select(selectors.getAuthToken);
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/trips/${action.payload.id}/`,
+                {
+                    method: 'DELETE',
+                    headers:{
+                        'Content-Type':'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            );
+
+            if(response.status >= 200 && response.status <= 300){
+                console.log("Se elimino correctamente");
+                yield put(
+                    actions.completeDeletingTrip(),
+                );
+            } else{
+                console.log('Falló el post');
+                yield put(actions.failAddingTrip(action.payload.id, "Fallo la conexión"))
+            }
+        }
+    } catch (error) {
+        console.log("ERROR", error);
+        yield put(actions.failAddingTrip(action.payload.id, error));
+    }
+}
+
+export function* watchTripDelete(){
+    yield takeEvery(
+        types.TRIP_DELETE_STARTED,
+        deleteTrip,
+    )
+}
+

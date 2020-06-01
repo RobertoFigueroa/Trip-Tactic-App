@@ -32,6 +32,7 @@ export const getFetchingTripsError = state => tripSelectors.getFetchingTripsErro
 //registration
 export const getUserRegistering = state => registrationSelectors.getUserRegistering(state.registration);
 export const getIsRegistering = state => registrationSelectors.getIsRegistering(state.registration);
+export const getRegistrationCompleted = state => registrationSelectors.getRegistrationCompleted(state.registration);
 
 
 /*
