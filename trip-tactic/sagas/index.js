@@ -3,7 +3,8 @@ import { fork, all } from 'redux-saga/effects';
 import { watchLoginStarted } from '../sagas/auth';
 import { watchTripsFetch, watchTripsAdd, watchTripDelete } from './trips';
 import { watchSignin } from './registration';
-import {whatchCountriesFetch} from './country'
+import { whatchCountriesFetch } from './country'
+import { watchCityFetch } from './city'
 
 function* mainSaga() {
   yield all([
@@ -13,6 +14,7 @@ function* mainSaga() {
     fork(watchTripsAdd),
     fork(watchTripDelete),
     fork(whatchCountriesFetch),
+    fork(watchCityFetch),
   ]);
 }
 

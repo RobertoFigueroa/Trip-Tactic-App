@@ -4,12 +4,14 @@ import auth, * as authSelectors from './auth';
 import trips, * as tripSelectors from './trips';
 import registration, * as registrationSelectors from './registration';
 import countries, * as countrySelectors from './country';
+import cities, * as citySelectors from "./city";
 
 const reducer = combineReducers({
   auth,
   trips,
   registration,
   countries,
+  cities,
 });
 
 export default reducer;
@@ -42,6 +44,13 @@ export const getAllCountries = state => countrySelectors.getAllCountries(state.c
 export const isFetchingCountries = state => countrySelectors.isFetchingCountries(state.countries);
 export const getFetchingCountriesError = state => countrySelectors.getFetchingCountriesError(state.countries);
 export const getSelectedCountry = state => countrySelectors.getSelectedCounty(state.countries);
+
+//city
+export const getCity = (state, id) => citySelectors.getCity(state.cities, id);
+export const getWantedCities = (state, countryId) => citySelectors.getWantedCities(state.cities, countryId);
+export const isFetchingCities = state => citySelectors.isFetchingCities(state.cities);
+export const getFetchingCitiesError = state => citySelectors.getFetchingCitiesError(state.cities);
+export const getSelectedCity = state => citySelectors.getSelectedCity(state.cities);
 
 /*
 How the state seems like

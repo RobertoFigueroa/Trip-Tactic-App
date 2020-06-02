@@ -22,3 +22,6 @@ export const selectCountry = countryId => ({
         countryId,
     }
 })
+export const deselectCountry = () =>({
+    type: types.COUNTRY_DESELECTED,
+})
