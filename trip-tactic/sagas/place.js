@@ -6,14 +6,13 @@ import {
   } from 'redux-saga/effects';
 
 import { normalize } from 'normalizr';
-
 import { API_BASE_URL } from '../settings';
 import * as selectors from '../reducers';
-import * as actions from '../actions/city';
-import * as types from '../types/city';
-import * as schema from '../schemas/city';
+import * as actions from '../actions/place';
+import * as types from '../types/place';
+import * as schema from '../schemas/place';
 
-function* fetchCities(action) {
+function* fetchPlaces(action){
     try {
         const isAuth = yield select(selectors.isAuthenticated)
 
@@ -21,7 +20,7 @@ function* fetchCities(action) {
             const token = yield select(selectors.getAuthToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/cities/`,
+                `${API_BASE_URL}/places/`,
                 {
                     method: 'GET',
                     headers:{
@@ -31,20 +30,21 @@ function* fetchCities(action) {
                 }
             );
 
-            if(response.status ===200){
+            if(response.status === 200){
                 const jsonResult = yield response.json();
                 const {
-                    entities: { cities },
+                    entities: { places },
                     result,
-                } = normalize(jsonResult, schema.cities);
+                } = normalize(jsonResult, schema.places);
                 yield put(
-                    actions.completeFetchingCities(
-                        cities,
+                    actions.completeFetchingPlaces(
+                        places,
                         result
                     ),
                 );
+               console.log(places) 
             } else{
-                console.log('ERROR GETTING THE CITIES')
+                console.log('ERROR GETTING THE PLACES')
             }
         }
     } catch (error) {
@@ -52,9 +52,9 @@ function* fetchCities(action) {
     }
 }
 
-export function* watchCityFetch(){
+export function* watchPlaceFetch(){
     yield takeEvery(
-        types.CITIES_FETCH_STARTED,
-        fetchCities,
+        types.PLACE_FETCH_STARTED,
+        fetchPlaces,
     )
 }

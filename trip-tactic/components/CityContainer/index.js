@@ -12,6 +12,7 @@ const CityContainer = ({cities, isLoading, onLoad, onClick}) =>{
     useEffect(onLoad,[]);
     return(
         <View style = {styles.container}>
+            <Button title={'<-'} onPress = {onClick}/>
             {
                 cities.length ===0 && !isLoading &&(
                     <Text>
@@ -29,7 +30,6 @@ const CityContainer = ({cities, isLoading, onLoad, onClick}) =>{
                     cities.map(({id}) => <City key = {id} id = {id}/>)
                 )
             }
-            <Button title={'<-'} onPress = {onClick}/>
         </View>
     )
 };

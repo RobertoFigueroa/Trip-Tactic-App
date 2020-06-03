@@ -16,9 +16,12 @@ export const failFetchingCities = error => ({
         error,
     }
 });
-export const selectCity = countryId => ({
+export const selectCity = cityId => ({
     type: types.CITY_SELECTED,
     payload:{
         cityId,
     }
+});
+export const deselectCity = () => ({
+    type: types.CITY_DESELECTED,
 })

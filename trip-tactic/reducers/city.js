@@ -46,6 +46,9 @@ const selectedCity = (state = null, action) =>{
         case types.CITY_SELECTED:{
             return action.payload.cityId;
         }
+        case types.CITY_DESELECTED:{
+            return null;
+        }
         default:{
             return state;
         }

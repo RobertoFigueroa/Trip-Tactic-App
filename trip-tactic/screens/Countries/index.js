@@ -4,14 +4,16 @@ import { View } from 'react-native';
 
 import CountryContainer from '../../components/CountryContainer';
 import CityContainer from '../../components/CityContainer';
+import PlaceContainer from '../../components/PlaceContainer';
 import styles from './styles';
 import * as selectors from '../../reducers';
 
-const Country = ({selectedCountry}) => {
+
+const Country = ({selectedCountry, selectedCity}) => {
     return(
         <View style = {styles.container} >
             {
-                selectedCountry === null ? <CountryContainer/> :<CityContainer/>
+                selectedCountry && selectedCity ? <PlaceContainer/> : selectedCountry === null? <CountryContainer/>: <CityContainer/>
             }
         </View>
     );
@@ -20,6 +22,7 @@ const Country = ({selectedCountry}) => {
 export default connect(
     state => ({
         selectedCountry: selectors.getSelectedCountry(state),
+        selectedCity: selectors.getSelectedCity(state),
     }),
     null
 )(Country)
