@@ -29,7 +29,6 @@ const PlaceContainer = ({places, isLoading, onLoad, onClick}) =>{
                     places.map(({id}) => <Place key = {id} id = {id}/>)
                 )
             }
-            <Button title={'<-'} onPress = {onClick}/>
         </View>
     )
 };

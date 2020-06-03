@@ -8,12 +8,12 @@ import * as actions from '../../actions/city';
 
 const img = require('../../assets/cities.jpg');
 
-const City = ({info, onClick}) => (
+const City = ({info, navigation, id}) => (
     <View style = {styles.cardNotSelected} >
             <View style = {styles.cardContent}>
                 <Image style={styles.image} source={img}/>
                 <Text style ={styles.text}>{info.name}</Text>
-                <Button title={'Select'} onPress = {onClick}/>
+                <Button title={'Select'} onPress = {()=> navigation.navigate('Places', {id})}/>
             </View> 
         </View>
 );
@@ -23,9 +23,5 @@ export default connect(
         isSelected: selectors.getSelectedCity(state) === id,
         info: selectors.getCity(state,id)
     }),
-    (dispatch, { id }) => ({
-        onClick(){
-            dispatch(actions.selectCity(id))
-        }
-    })
+    null
 )(City)

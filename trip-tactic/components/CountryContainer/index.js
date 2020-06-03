@@ -7,7 +7,7 @@ import * as selectors from '../../reducers';
 import * as actions from '../../actions/country';
 import Country from '../Country';
 
-const CountryContainer = ({countries, isLoading, onLoad}) => {
+const CountryContainer = ({countries, isLoading, onLoad, navigation}) => {
     useEffect(onLoad, []);
     return(
         <View style = {styles.container}>
@@ -27,7 +27,7 @@ const CountryContainer = ({countries, isLoading, onLoad}) => {
             }
             {
                 countries.length > 0 && !isLoading && (
-                    countries.map(({id}) => <Country key = {id} id = {id}/>)
+                    countries.map(({id}) => <Country key = {id} id = {id} navigation={navigation}/>)
                 )
             }
         </View>

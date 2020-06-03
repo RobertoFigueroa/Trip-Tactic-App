@@ -58,3 +58,48 @@ export function* watchPlaceFetch(){
         fetchPlaces,
     )
 }
+
+function* addPlace(action) {
+    const oldId = actions.payload.id;
+    try {
+        const isAuth = yield select(selectors.isAuthenticated);
+        if(isAuth){
+            const token = yield select(selectors.getAuthToken);
+            const cityId = yield select(selectors.getSelectedCity);
+            const data = {...action.payload, city:cityId};
+            const response = yield call(
+                fetch,
+                `${API_BASE_URL}/places/`,
+                {
+                    method: 'POST',
+                    body: JSON.stringify(data),
+                    headers: {
+                        'Content-Type':'application/json',
+                        'Authorization': `JWT ${token}`,
+                    },
+                }
+            );
+
+            if(response.status >= 200 && response.status <=300){
+                const jsonResult = yield response.json();
+                yield put(
+                    actions.completeAddingPlace(
+                        oldId,
+                        jsonResult,
+                    ),
+                );
+            } else{
+                yield put(actions.failAddingPlace(oldId, 'Error adding your trip'))
+            }
+        }
+    } catch (error) {
+        console.log('ERROR', error);
+    }
+}
+
+export function* watchPlaceAdd(){
+    yield takeEvery(
+        types.PLACE_ADD_STARTED,
+        addPlace,
+    )
+}
