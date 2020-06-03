@@ -4,12 +4,16 @@ import auth, * as authSelectors from './auth';
 import trips, * as tripSelectors from './trips';
 import registration, * as registrationSelectors from './registration';
 import countries, * as countrySelectors from './country';
+import events, * as eventSelectors from './events';
+import plans, * as plansSelectors from './plans';
 
 const reducer = combineReducers({
   auth,
   trips,
   registration,
   countries,
+  events,
+  plans,
 });
 
 export default reducer;
@@ -41,6 +45,20 @@ export const getCountry = (state, id) => countrySelectors.getCountry(state.count
 export const getAllCountries = state => countrySelectors.getAllCountries(state.countries);
 export const isFetchingCountries = state => countrySelectors.isFetchingCountries(state.countries);
 export const getFetchingCountriesError = state => countrySelectors.getFetchingCountriesError(state.countries);
+
+//events
+export const getEvent = (state, id) => eventSelectors.getEvent(state.events, id);
+export const getEventOfTrip = (state, tripId) => eventSelectors.getEventOfTrip(state.events, tripId);
+export const getAllEvents = state => eventSelectors.getAllEvents(state.events);
+export const isFetchingEvents = state => eventSelectors.isFetchingEvents(state.events);
+export const getFetchingEventError = state => eventSelectors.getFetchingEventError(state.events);
+
+//plans
+export const getPlan = (state, id) => plansSelectors.getPlan(state.plans, id);
+export const getPlanOfTrip = (state, tripId) => plansSelectors.getPlanOfTrip(state.plans, tripId);
+export const getAllPlans = state => plansSelectors.getAllPlans(state.plans);
+export const isFetchingPlans = state => plansSelectors.isFetchingPlans(state.plans);
+export const getFetchingPlanError = state => plansSelectors.getFetchingPlanError(state.plans);
 
 /*
 How the state seems like

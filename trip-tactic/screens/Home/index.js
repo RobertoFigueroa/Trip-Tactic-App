@@ -5,10 +5,10 @@ import { View } from 'react-native';
 import TripContainer from '../../components/TripContainer';
 import styles from './styles'
 
-const Home = () => {
+const Home = ({ navigation }) => {
     return(
         <View style = {styles.container}>
-            <TripContainer/>
+            <TripContainer navigation={navigation}/>
         </View>
     );
 }

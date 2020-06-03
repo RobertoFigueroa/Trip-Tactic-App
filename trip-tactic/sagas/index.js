@@ -4,6 +4,7 @@ import { watchLoginStarted } from '../sagas/auth';
 import { watchTripsFetch, watchTripsAdd, watchTripDelete } from './trips';
 import { watchSignin } from './registration';
 import {whatchCountriesFetch} from './country'
+import { watchPlanAdd, watchPlansFetch, watchPlanDelete } from './plans';
 
 function* mainSaga() {
   yield all([
@@ -13,6 +14,9 @@ function* mainSaga() {
     fork(watchTripsAdd),
     fork(watchTripDelete),
     fork(whatchCountriesFetch),
+    fork(watchPlanAdd),
+    fork(watchPlansFetch),
+    fork(watchPlanDelete),
   ]);
 }
 

@@ -16,6 +16,9 @@ import Home from './screens/Home';
 import Places from './screens/Places';
 import CreateTrip from './screens/CreateTrip';
 import Country from './screens/Countries';
+import CreateEvent from './screens/CreateEvent';
+import CreatePlan from './screens/CreatePlan';
+import Plans from './screens/Plans';
 
 import { AuthContext } from './context'
 
@@ -34,8 +37,12 @@ const HomeStack = createStackNavigator();
 const HomeStackScreen = () => (
   <HomeStack.Navigator>
     <HomeStack.Screen name="Home" component={Home}/>
+    <HomeStack.Screen name="CreateEvent" component={CreateEvent}/>
+    <HomeStack.Screen name="CreatePlan" component={CreatePlan}/>
+    <HomeStack.Screen name="Plans" component={Plans}/>
   </HomeStack.Navigator>
 );
+
 
 const AuthStackScreen = () => (
   <AuthStack.Navigator>
@@ -160,7 +167,7 @@ function App() {
                 <AuthStackScreen />
             ) : (
               <Drawer.Navigator>
-                <Drawer.Screen name="Home" component={Home}  />
+                <Drawer.Screen name="Home" component={HomeStackScreen}  />
                 <Drawer.Screen name="Places" component={Places} />
                 <Drawer.Screen name="CreateTrip" component={CreateTrip} />
                 <Drawer.Screen name ="Countries" component={Country}/>

@@ -3,18 +3,17 @@ import unionWith from 'lodash/unionWith';
 import union from 'lodash/union';
 import isEqual from 'lodash/isEqual';
 
-import {combineReducers} from 'redux';
+import { combineReducers } from 'redux';
 
 
-import * as types from '../types/trips';
+import * as types from '../types/events';
 
 
 const byId = (state = {}, action) =>{
     switch(action.type){
-        case types.TRIP_FETCH_COMPLETED:{
+        case types.EVENT_FETCH_COMPLETED:{
             const{entities, order} = action.payload;
             if(state){
-
                 const newState = {...state};
                 order.forEach(id=>{
                     newState[id] = {
@@ -29,7 +28,7 @@ const byId = (state = {}, action) =>{
                 return newState;
             }
         }
-        case types.TRIP_ADD_STARTED:{
+        case types.EVENT_ADD_STARTED:{
             const newState = {...state};
             newState[action.payload.id] ={
                 ...action.payload,
@@ -37,16 +36,16 @@ const byId = (state = {}, action) =>{
             };
             return newState
         }
-        case types.TRIP_ADD_COMPLETED:{
-            const{oldId, trip} = action.payload;
+        case types.EVENT_ADD_COMPLETED:{
+            const{oldId, event} = action.payload;
             const newState = omit(state, oldId);
-            newState[trip.id] = {
-                ...trip,
+            newState[event.id] = {
+                ...event,
                 isConfirmed: true
             };
             return newState
         }
-        case types.TRIP_DELETE_STARTED:{
+        case types.EVENT_DELETE_STARTED:{
             return omit(state, action.payload.id)
         }
         default:{
@@ -57,17 +56,17 @@ const byId = (state = {}, action) =>{
 
 const order = (state = [], action) =>{
     switch(action.type){
-        case types.TRIP_FETCH_COMPLETED:{
+        case types.EVENT_FETCH_COMPLETED:{
             return union(state, action.payload.order);
         }
-        case types.TRIP_ADD_STARTED:{
+        case types.EVENT_ADD_STARTED:{
             return[...state, action.payload.id];
         }
-        case types.TRIP_ADD_COMPLETED:{
-            const {oldId, trip} = action.payload;
-            return state.map(id => id === oldId? trip.id : id);
+        case types.EVENT_ADD_COMPLETED:{
+            const {oldId, event} = action.payload;
+            return state.map(id => id === oldId? event.id : id);
         }
-        case types.TRIP_DELETE_STARTED:{
+        case types.EVENT_DELETE_STARTED:{
             return state.filter(id => id !== action.payload.id);
         }
         default:{
@@ -78,13 +77,13 @@ const order = (state = [], action) =>{
 
 const isFetching = (state = false, action) =>{
     switch(action.type){
-        case types.TRIP_FETCH_STARTED:{
+        case types.EVENT_FETCH_STARTED:{
             return true;
         }
-        case types.TRIP_FETCH_COMPLETED:{
+        case types.EVENT_FETCH_COMPLETED:{
             return false;
         }
-        case types.TRIP_FETCH_FAILED:{
+        case types.EVENT_FETCH_FAILED:{
             return false;
         }
         default:{
@@ -95,13 +94,13 @@ const isFetching = (state = false, action) =>{
 
 const error = (state = null, action) => {
     switch(action.type){
-        case types.TRIP_FETCH_FAILED:{
+        case types.EVENT_FETCH_FAILED:{
             return action.payload.error;
         }
-        case types.TRIP_FETCH_STARTED:{
+        case types.EVENT_FETCH_STARTED:{
             return null
         }
-        case types.TRIP_FETCH_COMPLETED:{
+        case types.EVENT_FETCH_COMPLETED:{
             return null;
         }
         default:{
@@ -110,18 +109,19 @@ const error = (state = null, action) => {
     }
 }
 
-const trips = combineReducers({
+const events = combineReducers({
     byId,
     order,
     isFetching,
     error,
 });
 
-export default trips;
+export default events;
 
 //Selectors
 
-export const getTrip = (state, id) => state.byId[id];
-export const getAllTrips = state => state.order.map(id => getTrip(state,id));
-export const isFetchingTrips = state => state.isFetching;
-export const getFetchingTripsError = state => state.error;
+export const getEvent = (state, id) => state.byId[id];
+export const getEventOfTrip = (state, tripId) => state.order.map(id => getEvent(state, id).trip === tripId && getEvent(state, id));
+export const getAllEvents = state => state.order.map(id => getEvent(state,id));
+export const isFetchingEvents = state => state.isFetching;
+export const getFetchingEventError = state => state.error;

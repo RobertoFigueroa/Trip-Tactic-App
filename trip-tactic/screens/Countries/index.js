@@ -12,4 +12,4 @@ const Country = () => {
     );
 }
 
-export default Country
+export default Country;
