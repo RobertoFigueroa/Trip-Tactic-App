@@ -16,3 +16,12 @@ export const failFetchingCountries = error => ({
         error,
     }
 });
+export const selectCountry = countryId => ({
+    type: types.COUNTRY_SELECTED,
+    payload:{
+        countryId,
+    }
+})
+export const deselectCountry = () =>({
+    type: types.COUNTRY_DESELECTED,
+})

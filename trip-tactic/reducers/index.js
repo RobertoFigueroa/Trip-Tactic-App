@@ -6,6 +6,8 @@ import registration, * as registrationSelectors from './registration';
 import countries, * as countrySelectors from './country';
 import events, * as eventSelectors from './events';
 import plans, * as plansSelectors from './plans';
+import cities, * as citySelectors from './city';
+import places, * as placeSelectors from './place';
 
 const reducer = combineReducers({
   auth,
@@ -14,6 +16,8 @@ const reducer = combineReducers({
   countries,
   events,
   plans,
+  cities,
+  places,
 });
 
 export default reducer;
@@ -45,6 +49,7 @@ export const getCountry = (state, id) => countrySelectors.getCountry(state.count
 export const getAllCountries = state => countrySelectors.getAllCountries(state.countries);
 export const isFetchingCountries = state => countrySelectors.isFetchingCountries(state.countries);
 export const getFetchingCountriesError = state => countrySelectors.getFetchingCountriesError(state.countries);
+export const getSelectedCountry = state => countrySelectors.getSelectedCounty(state.countries);
 
 //events
 export const getEvent = (state, id) => eventSelectors.getEvent(state.events, id);
@@ -60,6 +65,18 @@ export const getAllPlans = state => plansSelectors.getAllPlans(state.plans);
 export const isFetchingPlans = state => plansSelectors.isFetchingPlans(state.plans);
 export const getFetchingPlanError = state => plansSelectors.getFetchingPlanError(state.plans);
 
+//city
+export const getCity = (state, id) => citySelectors.getCity(state.cities, id);
+export const getWantedCities = (state, countryId) => citySelectors.getWantedCities(state.cities, countryId);
+export const isFetchingCities = state => citySelectors.isFetchingCities(state.cities);
+export const getFetchingCitiesError = state => citySelectors.getFetchingCitiesError(state.cities);
+export const getSelectedCity = state => citySelectors.getSelectedCity(state.cities);
+
+//place
+export const getPlace = (state, id) => placeSelectors.getPlace(state.places, id);
+export const getWantedPlaces = (state, cityId) => placeSelectors.getWantedPlaces(state.places, cityId);
+export const isFetchingPlaces = state => placeSelectors.isFetchingPlaces(state.places);
+export const getFetchingPlacesError = state => placeSelectors.getErrorFetchingPlaces(state.places);
 /*
 How the state seems like
 

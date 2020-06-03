@@ -2,13 +2,7 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
 
-    image: { 
-      width:100,
-      height: 100,
-    },
     cardNotSelected: {
-      width:120,
-      height: 120,
       alignItems: "center",
       borderRadius: 6,
       elevation: 3,
@@ -21,8 +15,6 @@ const styles = StyleSheet.create({
       marginVertical: 6,
     },
     cardSelected: {
-      width:120,
-      height: 120,
       alignItems: "center",
       borderRadius: 6,
       elevation: 3,

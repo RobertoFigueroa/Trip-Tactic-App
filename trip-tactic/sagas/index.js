@@ -5,6 +5,8 @@ import { watchTripsFetch, watchTripsAdd, watchTripDelete } from './trips';
 import { watchSignin } from './registration';
 import {whatchCountriesFetch} from './country'
 import { watchPlanAdd, watchPlansFetch, watchPlanDelete } from './plans';
+import { watchCityFetch } from './city';
+import { watchPlaceFetch } from './place';
 
 function* mainSaga() {
   yield all([
@@ -17,6 +19,8 @@ function* mainSaga() {
     fork(watchPlanAdd),
     fork(watchPlansFetch),
     fork(watchPlanDelete),
+    fork(watchCityFetch),
+    fork(watchPlaceFetch),
   ]);
 }
 

@@ -1,13 +1,14 @@
 import unionWith from 'lodash/unionWith';
 import union from 'lodash/union';
 import isEqual from 'lodash/isEqual';
+import filter from "lodash/filter";
 
 import {combineReducers} from 'redux';
-import * as types from '../types/country';
+import * as types from '../types/city';
 
 const byId = (state = {}, action) =>{
     switch(action.type){
-        case types.COUNTRIES_FETCH_COMPLETED:{
+        case types.CITIES_FETCH_COMPLETED:{
             const{entities, order} = action.payload;
             if(state){
                 const newState = {...state};
@@ -31,77 +32,77 @@ const byId = (state = {}, action) =>{
 
 const order = (state = [], action) => {
     switch(action.type){
-        case types.COUNTRIES_FETCH_COMPLETED:{
+        case types.CITIES_FETCH_COMPLETED:{
             return union(state, action.payload.order);
         }
         default:{
             return state;
         }
     }
-}
+};
 
-const selectedCountry = (state = null, action) =>{
+const selectedCity = (state = null, action) =>{
     switch(action.type){
-        case types.COUNTRY_SELECTED:{
-            return action.payload.countryId;
+        case types.CITY_SELECTED:{
+            return action.payload.cityId;
         }
-        case types.COUNTRY_DESELECTED:{
-            return null
+        case types.CITY_DESELECTED:{
+            return null;
         }
         default:{
             return state;
         }
     }
-}
+};
 
 const isFetching = (state = false, action) =>{
     switch(action.type){
-        case types.COUNTRIES_FETCH_STARTED:{
+        case types.CITIES_FETCH_STARTED:{
             return true;
         }
-        case types.COUNTRIES_FETCH_COMPLETED:{
+        case types.CITIES_FETCH_COMPLETED:{
             return false;
         }
-        case types.COUNTRIES_FETCH_FAILED:{
+        case types.CITIES_FETCH_FAILED:{
             return false;
         }
         default:{
             return state;
         }
     }
-}
+};
 
 const fetchingError = (state = null, action) =>{
     switch(action.type){
-        case types.COUNTRIES_FETCH_FAILED:{
+        case types.CITIES_FETCH_FAILED:{
             return action.payload;
         }
-        case types.COUNTRIES_FETCH_STARTED:{
+        case types.CITIES_FETCH_STARTED:{
             return null;
         }
-        case types.COUNTRIES_FETCH_COMPLETED:{
+        case types.CITIES_FETCH_COMPLETED:{
             return null;
         }
         default:{
             return state;
         }
     }
-}
+};
 
-const countries = combineReducers({
+const cities = combineReducers({
     byId,
     order,
-    selectedCountry,
+    selectedCity,
     isFetching,
     fetchingError,
 });
 
-export default countries;
+export default cities;
 
 //SELECTORS
 
-export const getCountry = (state, id) => state.byId[id];
-export const getAllCountries = state => state.order.map(id => getCountry(state,id));
-export const isFetchingCountries = state => state.isFetching;
-export const getFetchingTripsError = state => state.fetchingError;
-export const getSelectedCounty = state => state.selectedCountry;
+export const getCity = (state, id) => state.byId[id];
+export const getWantedCities = (state, countryId) => filter(state.byId, {'country':countryId});
+export const isFetchingCities = state => state.isFetching;
+export const getFetchingCitiesError = state => state.fetchingError;
+export const getSelectedCity = state => state.selectedCity;
