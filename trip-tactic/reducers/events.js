@@ -2,6 +2,7 @@ import omit from 'lodash/omit';
 import unionWith from 'lodash/unionWith';
 import union from 'lodash/union';
 import isEqual from 'lodash/isEqual';
+import filter from 'lodash/filter';
 
 import { combineReducers } from 'redux';
 
@@ -121,7 +122,7 @@ export default events;
 //Selectors
 
 export const getEvent = (state, id) => state.byId[id];
-export const getEventOfTrip = (state, tripId) => state.order.map(id => getEvent(state, id).trip === tripId && getEvent(state, id));
+export const getEventOfTrip = (state, tripId) => filter(state.byId, pl => pl.plan === tripId);
 export const getAllEvents = state => state.order.map(id => getEvent(state,id));
 export const isFetchingEvents = state => state.isFetching;
 export const getFetchingEventError = state => state.error;

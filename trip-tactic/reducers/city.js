@@ -103,6 +103,7 @@ export default cities;
 
 export const getCity = (state, id) => state.byId[id];
 export const getWantedCities = (state, countryId) => filter(state.byId, {'country':countryId});
+export const getAllCities = state => state.order.map(index => getCity(state, index));
 export const isFetchingCities = state => state.isFetching;
 export const getFetchingCitiesError = state => state.fetchingError;
 export const getSelectedCity = state => state.selectedCity;

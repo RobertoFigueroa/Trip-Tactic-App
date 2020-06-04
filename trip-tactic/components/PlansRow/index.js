@@ -7,7 +7,7 @@ import * as selectors from '../../reducers';
 import * as actions from '../../actions/plans';
 
 const Plan = ({name, isConfirmed = false, onDelete, id, navigation, date}) =>(
-    <View style = {!isConfirmed ? styles.notCofirmedYet : styles.card} >
+    <View style = {!isConfirmed ? styles.notCofirmedYet : styles.card}  onStartShouldSetResponder={() => navigation.navigate("Events",{id})}>
         <View style={styles.cardContent}>
             <Text style={styles.text}>{ name }</Text>
             <Text style={styles.textDate}> { date }</Text>

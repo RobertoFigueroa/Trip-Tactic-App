@@ -4,27 +4,23 @@ import { View, Text, Button, Image, ActivityIndicator, ScrollView } from 'react-
 
 import  styles from './styles.js';
 import * as selectors from '../../reducers';
-import * as actions from '../../actions/trips';
-import * as actionTransport from '../../actions/transport';
-import Trip from '../Trip';
+import * as actions from '../../actions/events';
+import Event from '../Event';
 
 const img = require('../../assets/goTravel.png');
 
-import { AuthContext } from '../../context';
 
-
-const TripContainer = ({trips, isLoading, onLoad, navigation}) => {
+const EventContainer = ({events, isLoading, onLoad, navigation}) => {
     useEffect(onLoad,[]);
-    const { signOut } = useContext(AuthContext);
     return(
         <View style={styles.container}>
             <ScrollView>
             
             {
-                trips.length === 0 && !isLoading && (
+                events.length === 0 && !isLoading && (
                     <View style={styles.containerEmpty}>
                     <Text style={styles.text}>
-                        {'You dont have any scheduled trips'}
+                        {'You dont have any scheduled events'}
                     </Text>
                     <Image style={styles.image} source={img}/>
                     </View>
@@ -36,25 +32,23 @@ const TripContainer = ({trips, isLoading, onLoad, navigation}) => {
                 )
             }
             {
-                trips.length > 0 && !isLoading && (
-                    trips.map(({ id }) => <Trip key={id} id={id} navigation={navigation}/>)
+                events.length > 0 && !isLoading && (
+                    events.map(({ id }) => <Event key={id} id={id} navigation={navigation}/>)
                 )
             }
-            <Button title={"Sign Out"} onPress={() => {signOut()}}></Button>
             </ScrollView>
         </View>
     );
 };
 
 export default connect(
-    state => ({
-        trips: selectors.getAllTrips(state),
-        isLoading: selectors.isFetchingTrips(state),
+    (state, { planId }) => ({
+        events: selectors.getEventOfTrip(state,planId),
+        isLoading: selectors.isFetchingEvents(state),
     }),
     dispatch =>({
         onLoad() {
-            dispatch(actions.startFetchingTrips());
-            dispatch(actionTransport.startFetchingTransports());
+            dispatch(actions.startFetchingEvents());
         },
     }),
-)(TripContainer)
+)(EventContainer)

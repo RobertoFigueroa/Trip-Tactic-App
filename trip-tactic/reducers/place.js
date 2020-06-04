@@ -118,3 +118,4 @@ export const getPlace = (state, id) => state.byId[id];
 export const getWantedPlaces = (state, cityId) => filter(state.byId, {'city': cityId})
 export const isFetchingPlaces = state => state.isFetching;
 export const getErrorFetchingPlaces = state => state.errorFetching;
+export const getAllPlaces = state => state.order.map(index => getPlace(state, index));

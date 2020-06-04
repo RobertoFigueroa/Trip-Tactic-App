@@ -19,6 +19,7 @@ import Country from './screens/Countries';
 import CreateEvent from './screens/CreateEvent';
 import CreatePlan from './screens/CreatePlan';
 import Plans from './screens/Plans';
+import Events from './screens/Events';
 
 import { AuthContext } from './context'
 
@@ -40,6 +41,7 @@ const HomeStackScreen = () => (
     <HomeStack.Screen name="CreateEvent" component={CreateEvent}/>
     <HomeStack.Screen name="CreatePlan" component={CreatePlan}/>
     <HomeStack.Screen name="Plans" component={Plans}/>
+    <HomeStack.Screen name="Events" component={Events}/>
   </HomeStack.Navigator>
 );
 

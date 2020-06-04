@@ -8,6 +8,7 @@ import events, * as eventSelectors from './events';
 import plans, * as plansSelectors from './plans';
 import cities, * as citySelectors from './city';
 import places, * as placeSelectors from './place';
+import transports, * as transportSelectors from './transport';
 
 const reducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   plans,
   cities,
   places,
+  transports,
 });
 
 export default reducer;
@@ -71,12 +73,22 @@ export const getWantedCities = (state, countryId) => citySelectors.getWantedCiti
 export const isFetchingCities = state => citySelectors.isFetchingCities(state.cities);
 export const getFetchingCitiesError = state => citySelectors.getFetchingCitiesError(state.cities);
 export const getSelectedCity = state => citySelectors.getSelectedCity(state.cities);
+export const getAllCities = state => citySelectors.getAllCities(state.cities);
+
 
 //place
 export const getPlace = (state, id) => placeSelectors.getPlace(state.places, id);
 export const getWantedPlaces = (state, cityId) => placeSelectors.getWantedPlaces(state.places, cityId);
 export const isFetchingPlaces = state => placeSelectors.isFetchingPlaces(state.places);
 export const getFetchingPlacesError = state => placeSelectors.getErrorFetchingPlaces(state.places);
+export const getAllPlaces = state => placeSelectors.getAllPlaces(state.places);
+
+//transport
+export const getTransport = (state, id) => transportSelectors.getTransport(state.transports, id); 
+export const getAllTransports = state => transportSelectors.getAllTransports(state.transports);
+export const isFetcihngTransports = state => transportSelectors.isFetcihngTransports(state.transports);
+export const getFetchingTransportsError = state => transportSelectors.getFetchingTransportsError(state.transports); 
+
 /*
 How the state seems like
 

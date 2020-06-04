@@ -17,15 +17,15 @@ export const failFetchingEvents = error => ({
     }
 });
 
-export const startAddingEvent = trip => ({
+export const startAddingEvent = event => ({
     type: types.EVENT_ADD_STARTED,
-    payload: trip,
+    payload: event,
 });
-export const completeAddingEvent = (oldId, trip) => ({
+export const completeAddingEvent = (oldId, event) => ({
     type: types.EVENT_ADD_COMPLETED,
     payload:{
         oldId,
-        trip,
+        event,
     }
 });
 export const failAddingEvent = (oldId, error) => ({
