@@ -4,24 +4,19 @@ import { View, Text, Button } from 'react-native'
 
 import styles from './styles';
 import * as selectors from '../../reducers';
-import * as actions from '../../actions/place';
 
-const City = ({info, navigation, id}) => (
+
+const Comment = ({info}) => (
     <View style = {styles.cardNotSelected} >
             <View style ={styles.cardNotSelected} >
-                <Text style ={styles.text}>{info.name}</Text>
-                <Button title={'View Comments'} onPress = {()=> navigation.navigate("Comments", {id})}/>
+                <Text style ={styles.text}>{info.score}</Text>
+                <Text style = {styles.text}>{info.comment}</Text>
             </View> 
         </View>
 )
 export default connect(
     (state, { id })=> ({
-        info: selectors.getPlace(state,id)
+        info: selectors.getComment(state,id)
     }),
     null
-    // (dispatch, { id }) => ({
-    //     onClick(){
-
-    //     }
-    // })
-)(City)
+)(Comment)

@@ -26,7 +26,7 @@ const PlaceContainer = ({navigation,places, isLoading, onLoad, cityId}) =>{
             }
             {
                 places.length > 0 && !isLoading && (
-                    places.map(({id}) => <Place key = {id} id = {id}/>)
+                    places.map(({id}) => <Place key = {id} id = {id} navigation = {navigation}/>)
                 )
             }
             <Button title = '+' onPress = {() => navigation.navigate('CreatePlace',{cityId})} />

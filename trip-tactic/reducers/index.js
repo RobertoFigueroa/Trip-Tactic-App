@@ -8,6 +8,7 @@ import events, * as eventSelectors from './events';
 import plans, * as plansSelectors from './plans';
 import cities, * as citySelectors from './city';
 import places, * as placeSelectors from './place';
+import comments, * as commentSelectors from './comment';
 
 const reducer = combineReducers({
   auth,
@@ -18,6 +19,7 @@ const reducer = combineReducers({
   plans,
   cities,
   places,
+  comments,
 });
 
 export default reducer;
@@ -77,24 +79,10 @@ export const getPlace = (state, id) => placeSelectors.getPlace(state.places, id)
 export const getWantedPlaces = (state, cityId) => placeSelectors.getWantedPlaces(state.places, cityId);
 export const isFetchingPlaces = state => placeSelectors.isFetchingPlaces(state.places);
 export const getFetchingPlacesError = state => placeSelectors.getErrorFetchingPlaces(state.places);
-/*
-How the state seems like
 
-state = {
-   auth : {
-     token: null,
-     decoded: null,
-     isAuthenticating: false,
-     error: null,
-   }
-   trips:{
-     byId:{},
-     order:[],
-     isFetching: false,
-     error: null,
-   }
-
-
-}
-
-*/
+//comments
+export const getComment = (state, id) => commentSelectors.getComment(state.comments, id);
+export const getPlaceComments = (state, placeId) => commentSelectors.getPlaceComments(state.comments,placeId);
+export const getUserComments = (state, userId) => commentSelectors.getUserComments(state.comments, userId);
+export const isFetchingComments = state => commentSelectors.isFetchingComments(state.comments)
+export const getErrorFetchingComments = state => commentSelectors.getErrorFetchingComments(state.comments);

@@ -21,6 +21,8 @@ import CreatePlan from './screens/CreatePlan';
 import Plans from './screens/Plans';
 import City from './screens/Cities'
 import CreatePlace from './screens/CreatePlace';
+import Comments from './screens/Comments';
+import CreateComment from './screens/CreateComment';
 
 import { AuthContext } from './context'
 
@@ -46,12 +48,15 @@ const HomeStackScreen = () => (
 );
 
 const ExploreStack = createStackNavigator()
+
 const ExploreStackScreen = () => (
   <ExploreStack.Navigator>
     <ExploreStack.Screen name ="Countries" component ={Country}/>
     <ExploreStack.Screen name ="Cities" component ={City}/>
     <ExploreStack.Screen name ="Places" component ={Places}/>
     <ExploreStack.Screen name ="CreatePlace" component ={CreatePlace}/>
+    <ExploreStack.Screen name ="Comments" component ={Comments}/>
+    <ExploreStack.Screen name ="Add Comment" component ={CreateComment}/>
   </ExploreStack.Navigator>
 )
 

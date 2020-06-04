@@ -37,10 +37,10 @@ const byId = (state = {}, action) =>{
             return newState
         }
         case types.COMMENT_ADD_COMPLETED:{
-            const{oldId, place} = action.payload;
+            const{oldId, comment} = action.payload;
             const newState = omit(state, oldId);
-            newState[place.id] = {
-                ...place,
+            newState[comment.id] = {
+                ...comment,
                 isConfirmed: true
             };
             return newState
@@ -60,8 +60,8 @@ const order = (state = [], action) =>{
             return[...state, action.payload.id];
         }
         case types.COMMENT_ADD_COMPLETED:{
-            const {oldId, place} = action.payload;
-            return state.map(id => id === oldId? place.id : id);
+            const {oldId, comment} = action.payload;
+            return state.map(id => id === oldId? comment.id : id);
         }
         default:{
             return state
@@ -103,14 +103,14 @@ const errorFetching = (state = null, action) =>{
     }
 };
 
-const places = combineReducers({
+const comments = combineReducers({
     byId,
     order,
     isFetching, 
     errorFetching
 });
 
-export default places;
+export default comments;
 
 //Selectors
 
