@@ -4,10 +4,17 @@ const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    flexDirection: 'row',
+    flexDirection: "column",
     backgroundColor:'white',  
-    flexWrap: "wrap",
   },
+  fixedButton:{
+    position:'absolute',
+    width: 50,
+    height: 100,
+    borderRadius:50,
+    right:30,
+    bottom: 30,
+  }
 
     
   });

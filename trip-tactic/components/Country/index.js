@@ -8,13 +8,14 @@ import styles from './styles.js';
 import * as selectors from '../../reducers';
 import * as actions from '../../actions/country';
 
-
+const img = require('../../assets/countries.jpg')
 
 const Country = ({info, id, isSelected = false, navigation}) =>(
-        <View style = {styles.card} >
-            <View style = {isSelected? styles.cardSelected: styles.cardNotSelected}>
+        <View style = {styles.cardNotSelected} >
+            <View style = {styles.cardContent}>
+                <Image style ={styles.image} source={img}/>
                 <Text style ={styles.text}>{info.name}</Text>
-                <Button title={'Select'} onPress = {()=>(navigation.navigate('Cities', {id}))}/>
+                <Button title={'Visit Cities'} onPress = {()=>(navigation.navigate('Cities', {id}))}/>
             </View> 
         </View>
 );

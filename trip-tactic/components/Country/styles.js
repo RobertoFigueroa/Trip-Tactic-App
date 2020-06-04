@@ -3,12 +3,12 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 
     image: { 
-      width:100,
+      width:300,
       height: 100,
     },
     cardNotSelected: {
-      width:120,
-      height: 120,
+      width: 320,
+      height: 200,
       alignItems: "center",
       borderRadius: 6,
       elevation: 3,

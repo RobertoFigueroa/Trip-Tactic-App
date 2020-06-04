@@ -13,7 +13,7 @@ const City = ({info, navigation, id}) => (
             <View style = {styles.cardContent}>
                 <Image style={styles.image} source={img}/>
                 <Text style ={styles.text}>{info.name}</Text>
-                <Button title={'Select'} onPress = {()=> navigation.navigate('Places', {id})}/>
+                <Button title={'Visit Places'} onPress = {()=> navigation.navigate('Places', {id})}/>
             </View> 
         </View>
 );
