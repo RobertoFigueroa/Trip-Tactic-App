@@ -20,6 +20,10 @@ import CreateEvent from './screens/CreateEvent';
 import CreatePlan from './screens/CreatePlan';
 import Plans from './screens/Plans';
 import Events from './screens/Events';
+import City from './screens/Cities'
+import CreatePlace from './screens/CreatePlace';
+import Comments from './screens/Comments';
+import CreateComment from './screens/CreateComment';
 
 import { AuthContext } from './context'
 
@@ -44,6 +48,19 @@ const HomeStackScreen = () => (
     <HomeStack.Screen name="Events" component={Events}/>
   </HomeStack.Navigator>
 );
+
+const ExploreStack = createStackNavigator()
+
+const ExploreStackScreen = () => (
+  <ExploreStack.Navigator>
+    <ExploreStack.Screen name ="Countries" component ={Country}/>
+    <ExploreStack.Screen name ="Cities" component ={City}/>
+    <ExploreStack.Screen name ="Places" component ={Places}/>
+    <ExploreStack.Screen name ="CreatePlace" component ={CreatePlace}/>
+    <ExploreStack.Screen name ="Comments" component ={Comments}/>
+    <ExploreStack.Screen name ="Add Comment" component ={CreateComment}/>
+  </ExploreStack.Navigator>
+)
 
 
 const AuthStackScreen = () => (
@@ -172,7 +189,7 @@ function App() {
                 <Drawer.Screen name="Home" component={HomeStackScreen}  />
                 <Drawer.Screen name="Places" component={Places} />
                 <Drawer.Screen name="CreateTrip" component={CreateTrip} />
-                <Drawer.Screen name ="Countries" component={Country}/>
+                <Drawer.Screen name ="Explore" component={ExploreStackScreen}/>
               </Drawer.Navigator>
               )}
           </PersistGate>

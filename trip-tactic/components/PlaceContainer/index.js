@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, ActivityIndicator, Button  } from 'react-native';
+import { View, Text, ActivityIndicator, Button, ScrollView } from 'react-native';
 
 import styles from './styles';
 import * as selectors from '../../reducers';
@@ -8,10 +8,11 @@ import * as actions from '../../actions/place';
 import * as cityActions from '../../actions/city';
 import Place from '../Place';
 
-const PlaceContainer = ({places, isLoading, onLoad, onClick}) =>{
+const PlaceContainer = ({navigation,places, isLoading, onLoad, cityId}) =>{
     useEffect(onLoad,[]);
     return(
         <View style = {styles.container}>
+            <ScrollView>
             {
                 places.length ===0 && !isLoading &&(
                     <Text>
@@ -26,17 +27,19 @@ const PlaceContainer = ({places, isLoading, onLoad, onClick}) =>{
             }
             {
                 places.length > 0 && !isLoading && (
-                    places.map(({id}) => <Place key = {id} id = {id}/>)
+                    places.map(({id}) => <Place key = {id} id = {id} navigation = {navigation}/>)
                 )
             }
-            <Button title={'<-'} onPress = {onClick}/>
+
+            </ScrollView>
+            <Button title = 'Add a place' onPress = {() => navigation.navigate('CreatePlace',{cityId})} style ={styles.fixedButton} />
         </View>
     )
 };
 
 export default connect(
-    state =>({
-        places: selectors.getWantedPlaces(state, selectors.getSelectedCity(state)),
+    (state, {cityId}) =>({
+        places: selectors.getWantedPlaces(state, cityId),
         isLoading: selectors.isFetchingPlaces(state),
     }),
     dispatch =>({

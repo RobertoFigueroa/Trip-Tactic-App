@@ -16,19 +16,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     marginVertical: 6,
   },
-    cardSelected: {
-      alignItems: "center",
-      borderRadius: 6,
-      elevation: 3,
-      backgroundColor: 'green',
-      shadowOffset: {width:1, height:1},
-      shadowColor: '#333',
-      shadowOpacity: 0.3,
-      shadowRadius: 2,
-      marginHorizontal: 16,
-      marginVertical: 6,
-    },
-
     cardContent: {
       flex: 1,
       marginHorizontal:18,
@@ -42,6 +29,7 @@ const styles = StyleSheet.create({
       width:300,
       height: 100,
     },
+
   });
   
   export default styles;

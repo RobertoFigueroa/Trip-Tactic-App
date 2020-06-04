@@ -8,11 +8,11 @@ import {
 import { normalize } from 'normalizr';
 import { API_BASE_URL } from '../settings';
 import * as selectors from '../reducers';
-import * as actions from '../actions/place';
-import * as types from '../types/place';
-import * as schema from '../schemas/place';
+import * as actions from '../actions/comment';
+import * as types from '../types/comment';
+import * as schema from '../schemas/comment';
 
-function* fetchPlaces(action){
+function* fetchComments(action){
     try {
         const isAuth = yield select(selectors.isAuthenticated)
 
@@ -20,7 +20,7 @@ function* fetchPlaces(action){
             const token = yield select(selectors.getAuthToken)
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/places/`,
+                `${API_BASE_URL}/userFeedBack/`,
                 {
                     method: 'GET',
                     headers:{
@@ -33,18 +33,18 @@ function* fetchPlaces(action){
             if(response.status === 200){
                 const jsonResult = yield response.json();
                 const {
-                    entities: { places },
+                    entities: { comments },
                     result,
-                } = normalize(jsonResult, schema.places);
+                } = normalize(jsonResult, schema.comments);
                 yield put(
-                    actions.completeFetchingPlaces(
-                        places,
+                    actions.completeFetchingComments(
+                        comments,
                         result
                     ),
                 );
-               console.log(places) 
+                console.log(comments)
             } else{
-                console.log('ERROR GETTING THE PLACES')
+                console.log('ERROR GETTING THE COMMENTS')
             }
         }
     } catch (error) {
@@ -52,22 +52,22 @@ function* fetchPlaces(action){
     }
 }
 
-export function* watchPlaceFetch(){
+export function* watchCommentFetch(){
     yield takeEvery(
-        types.PLACE_FETCH_STARTED,
-        fetchPlaces,
+        types.COMMENTS_FETCH_STARTED,
+        fetchComments,
     )
 }
 
-function* addPlace(action) {
+function* addComment(action) {
     try {
         const isAuth = yield select(selectors.isAuthenticated);
         if(isAuth){
-            console.log("Esto le mando al crear place", action.payload)
+            console.log('Esto llego al sagas de comment', action.payload)
             const token = yield select(selectors.getAuthToken);
             const response = yield call(
                 fetch,
-                `${API_BASE_URL}/places/`,
+                `${API_BASE_URL}/userFeedBack/`,
                 {
                     method: 'POST',
                     body: JSON.stringify(action.payload),
@@ -82,13 +82,13 @@ function* addPlace(action) {
                 console.log('buen camino')
                 const jsonResult = yield response.json();
                 yield put(
-                    actions.completeAddingPlace(
+                    actions.completeAddingComment(
                         action.payload.id,
                         jsonResult,
                     ),
                 );
             } else{
-                yield put(actions.failAddingPlace(oldId, 'Error adding your trip'))
+                yield put(actions.failAddingComment(action.payload.id, 'Error adding your Comment'))
             }
         }
     } catch (error) {
@@ -96,9 +96,9 @@ function* addPlace(action) {
     }
 }
 
-export function* watchPlaceAdd(){
+export function* watchCommentAdd(){
     yield takeEvery(
-        types.PLACE_ADD_STARTED,
-        addPlace,
+        types.COMMENT_ADD_STARTED,
+        addComment,
     )
 }

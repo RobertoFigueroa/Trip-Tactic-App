@@ -4,7 +4,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex:1,
-    flexDirection: "column",
+    flexDirection: 'column',
     backgroundColor:'white',  
   },
   fixedButton:{
@@ -15,7 +15,6 @@ const styles = StyleSheet.create({
     right:30,
     bottom: 30,
   }
-
     
   });
   

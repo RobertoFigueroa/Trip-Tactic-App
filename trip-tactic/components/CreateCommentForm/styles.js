@@ -4,11 +4,12 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    flexDirection: "column"
+    flexDirection: "column",
+    alignContent: 'center',
+    justifyContent: 'center',
   },
-  header :{
-    height:10
-  }
+
+
 });
 
 export default styles;

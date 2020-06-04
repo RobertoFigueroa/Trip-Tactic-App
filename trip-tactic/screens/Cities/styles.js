@@ -6,9 +6,6 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: "column"
   },
-  header :{
-    height:10
-  }
 });
 
 export default styles;
