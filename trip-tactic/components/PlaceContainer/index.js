@@ -8,7 +8,7 @@ import * as actions from '../../actions/place';
 import * as cityActions from '../../actions/city';
 import Place from '../Place';
 
-const PlaceContainer = ({places, isLoading, onLoad, onClick}) =>{
+const PlaceContainer = ({navigation,places, isLoading, onLoad, cityId}) =>{
     useEffect(onLoad,[]);
     return(
         <View style = {styles.container}>
@@ -29,13 +29,14 @@ const PlaceContainer = ({places, isLoading, onLoad, onClick}) =>{
                     places.map(({id}) => <Place key = {id} id = {id}/>)
                 )
             }
+            <Button title = '+' onPress = {() => navigation.navigate('CreatePlace',{cityId})} />
         </View>
     )
 };
 
 export default connect(
-    state =>({
-        places: selectors.getWantedPlaces(state, selectors.getSelectedCity(state)),
+    (state, {cityId}) =>({
+        places: selectors.getWantedPlaces(state, cityId),
         isLoading: selectors.isFetchingPlaces(state),
     }),
     dispatch =>({

@@ -60,31 +60,30 @@ export function* watchPlaceFetch(){
 }
 
 function* addPlace(action) {
-    const oldId = actions.payload.id;
     try {
         const isAuth = yield select(selectors.isAuthenticated);
         if(isAuth){
+            console.log("Esto le mando al crear place", action.payload)
             const token = yield select(selectors.getAuthToken);
-            const cityId = yield select(selectors.getSelectedCity);
-            const data = {...action.payload, city:cityId};
             const response = yield call(
                 fetch,
                 `${API_BASE_URL}/places/`,
                 {
                     method: 'POST',
-                    body: JSON.stringify(data),
+                    body: JSON.stringify(action.payload),
                     headers: {
                         'Content-Type':'application/json',
                         'Authorization': `JWT ${token}`,
                     },
                 }
             );
-
+            console.log(response.status)
             if(response.status >= 200 && response.status <=300){
+                console.log('buen camino')
                 const jsonResult = yield response.json();
                 yield put(
                     actions.completeAddingPlace(
-                        oldId,
+                        action.payload.id,
                         jsonResult,
                     ),
                 );

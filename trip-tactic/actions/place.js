@@ -17,15 +17,15 @@ export const failFetchingPlace = error => ({
     }
 });
 
-export const startAddingPlace = trip => ({
+export const startAddingPlace = place => ({
     type: types.PLACE_ADD_STARTED,
-    payload: trip,
+    payload: place,
 });
-export const completeAddingPlace = (oldId, trip) => ({
+export const completeAddingPlace = (oldId, place) => ({
     type: types.PLACE_ADD_COMPLETED,
     payload:{
         oldId,
-        trip,
+        place,
     }
 });
 export const failAddingPlace = (oldId, error) => ({

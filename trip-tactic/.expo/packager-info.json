@@ -1,10 +1,10 @@
 {
   "devToolsPort": 19002,
-  "expoServerPort": 19000,
-  "packagerPort": 19001,
-  "packagerPid": 628,
-  "expoServerNgrokUrl": "https://fw-s22.anonymous.trip-tactic.exp.direct",
-  "packagerNgrokUrl": "https://packager.fw-s22.anonymous.trip-tactic.exp.direct",
-  "ngrokPid": 9868,
+  "expoServerPort": null,
+  "packagerPort": null,
+  "packagerPid": null,
+  "expoServerNgrokUrl": null,
+  "packagerNgrokUrl": null,
+  "ngrokPid": null,
   "webpackServerPort": null
 }

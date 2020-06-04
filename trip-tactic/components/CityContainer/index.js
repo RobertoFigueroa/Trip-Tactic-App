@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator, ScrollView } from 'react-native';
 
 import styles from './styles';
 import * as selectors from '../../reducers';
@@ -12,23 +12,25 @@ const CityContainer = ({cities, isLoading, onLoad, navigation}) =>{
     useEffect(onLoad,[]);
     return(
         <View style = {styles.container}>
-            {
-                cities.length ===0 && !isLoading &&(
-                    <Text>
-                        {"There is no cities for your selected contry yet"}
-                    </Text>
-                )
-            }
-            {
-                isLoading &&(
-                    <ActivityIndicator  size="small" color="#0000ff" />
-                )
-            }
-            {
-                cities.length > 0 && !isLoading && (
-                    cities.map(({id}) => <City key = {id} id = {id} navigation ={navigation}/>)
-                )
-            }
+            <ScrollView>
+                {
+                    cities.length ===0 && !isLoading &&(
+                        <Text>
+                            {"There is no cities for your selected contry yet"}
+                        </Text>
+                    )
+                }
+                {
+                    isLoading &&(
+                        <ActivityIndicator  size="small" color="#0000ff" />
+                    )
+                }
+                {
+                    cities.length > 0 && !isLoading && (
+                        cities.map(({id}) => <City key = {id} id = {id} navigation ={navigation}/>)
+                    )
+                }
+            </ScrollView>
         </View>
     )
 };
