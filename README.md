@@ -2,9 +2,6 @@
 
 _Un app para planificar viajes al extranjero o locales y poder aprovechar al máximo tu tiempo_
 
-## Comenzando 🚀
-
-Mira **Deployment** para conocer como desplegar el proyecto.
 
 
 ### Pre-requisitos 📋
