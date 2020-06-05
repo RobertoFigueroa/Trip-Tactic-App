@@ -36,6 +36,8 @@ export const getAuthUserID = state => authSelectors.getAuthUserID(state.auth);
 export const getAuthExpiration = state => authSelectors.getAuthExpiration(state.auth);
 export const getAuthUsername = state => authSelectors.getAuthUsername(state.auth);
 export const isAuthenticated = state => authSelectors.getAuthToken(state) !== null;
+export const getIsRefreshingToken = state => authSelectors.getIsRefreshingToken(state.auth);
+export const getRefreshingError = state => authSelectors.getRefreshingError(state.auth);
  
 //trips
 export const getTrip = (state, id) => tripSelectors.getTrip(state.trips, id);

@@ -24,6 +24,7 @@ import City from './screens/Cities'
 import CreatePlace from './screens/CreatePlace';
 import Comments from './screens/Comments';
 import CreateComment from './screens/CreateComment';
+import RefreshToken from './components/RefreshToken';
 
 import { AuthContext } from './context'
 
@@ -192,6 +193,7 @@ function App() {
                 <Drawer.Screen name ="Explore" component={ExploreStackScreen}/>
               </Drawer.Navigator>
               )}
+              <RefreshToken reviewTime={60000} />
           </PersistGate>
         </Provider>
       </NavigationContainer>
